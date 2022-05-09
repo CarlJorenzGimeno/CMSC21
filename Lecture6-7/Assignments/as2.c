@@ -1,25 +1,23 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define DESTINATIONS 8
-#define NUM_PATHWAYS ((int) (sizeof(road_networks) / sizeof(road_networks[0])))
-
+#define DESTINATION 8
 
 int main(){
     int location, last_location;
     //Initialize road networks
-    bool road_networks[DESTINATIONS][DESTINATIONS] = {[0][0]=true,[0][1]=true,[0][5]=true,
+    bool road_networks[DESTINATION][DESTINATION] = {[0][0]=true,[0][1]=true,[0][5]=true,
                                                         [1][0]=true,[1][1]=true,[1][2]=true,
                                                         [2][1]=true,[2][2]=true,[2][4]=true,[2][5]=true,
                                                         [3][3]=true,[3][4]=true,
                                                         [4][3]=true,[4][4]=true,
-                                                        [5][0]=true,[5][2]=true,[5][5]=true,
+                                                        [5][0]=true,[5][2]=true,[5][5]=true,[5][3]=true,
                                                         [6][0]=true,[6][3]=true,[6][6]=true,
                                                         [7][5]=true,[7][7]=true,
                                                         };
     //Iterate through the 2d array and print them
-    for (int i = 0; i <= NUM_PATHWAYS; i++){
-        for (int j = 0; j <= NUM_PATHWAYS; j++){
+    for (int i = 0; i <= DESTINATION; i++){
+        for (int j = 0; j <= DESTINATION; j++){
 
             // Print the blank space on the top right
             if (i == 0 && j==0){
@@ -51,6 +49,7 @@ int main(){
         printf("\n");
     }
 
+    printf("%d",2^3);
     //Input
     printf("Which point are you located? 0 - A, 1 - B, 2 - C, 3 - D, 4 - E, 5 - F, 6 - G, 7 - H\n");
     scanf("%d",&location);
@@ -69,7 +68,7 @@ int main(){
         //Check all available routes
         //Has a failsafe to prevent going back and forth between two routes.
         else{
-            for (int i = 0; i < NUM_PATHWAYS; i++){
+            for (int i = 0; i < DESTINATION; i++){
                 if (road_networks[location][i] && i !=location && i != last_location){
                     last_location = location;
                     location = i;
